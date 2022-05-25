@@ -1,0 +1,8 @@
+<h1>posts#edit</h1>
+<%= form_for @post do |f| %>
+    <%= f.label :title %>
+    <p><%= f.text_field :title, :size => 50 %></p>
+    <%= f.label :contents %>
+    <p><%= f.text_field :contents, :size => 50 %></p>
+    <%= f.submit "編集する" %>
+<% end %>

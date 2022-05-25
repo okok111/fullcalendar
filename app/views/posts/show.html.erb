@@ -1,0 +1,53 @@
+<h1>posts#show</h1>
+
+<%= link_to "https://twitter.com/share?url=#{ request.url }&text=#{ @post.title }&text=#{ @post.contents }" ,target: '_blank' do %>
+    <%= image_tag "twi.png", size: '50x50' %>
+<% end %>
+
+<div class="post">
+    <p><%= @post.title %></p>
+    <p>
+        <% if @post.image.present? %>
+            <%= image_tag @post.image_url, size: '250x200'%>
+        <% else %>
+            <%= image_tag "nonono.png", size: '250x200' %>
+        <% end %>
+    </p>
+    <% if user_signed_in? %>
+        <% if current_user.already_liked?(@post) %>
+            <%= link_to post_like_path(id: @post.id, post_id: @post.id), method: :delete do %>
+                <i class="fas fa-heart"></i><%= @post.likes.count %>
+            <% end %>
+        <% else %>
+            <%= link_to post_likes_path(id: @post.id, post_id: @post.id), method: :post do %>
+                <i class="far fa-heart"></i><%= @post.likes.count %>
+            <% end %>
+        <% end %>
+    <% else %>
+        <i class="far fa-heart"></i><%= @post.likes.count %>
+    <% end %>
+    <p><%= @post.contents %></p>
+</div>
+    <div class="comment-wrapper">
+    <p>コメント一覧</p>
+        <% @comments.each do |c| %>
+            <div>
+            <%= c.user.email unless c.user.blank? %>
+            <br>
+            <%= c.content %>
+            </div>
+            <br>
+        <% end %>
+        <% if user_signed_in? %>
+            <%= form_with(model: [@post, @comment], local: true) do |f| %>
+                <%= f.text_area :content %>
+                <%= button_tag type: "submit" do %>
+                    <i class="far fa-comments"></i> コメントする
+                <% end %>
+            <% end %>
+        <% end %>
+        
+    </div>
+
+<%= link_to "編集する", edit_post_path(@post.id) %>
+<%= link_to "post一覧に戻る", posts_path %>
