@@ -8,7 +8,7 @@
 
 <%= link_to "新規投稿へ", new_post_path %>
 
-<!--
+
     <div class="posts-container">
         <% @posts.each do |t| %>
             <div class="post">
@@ -24,15 +24,15 @@
                 <% if user_signed_in? %>
                     <% if current_user.already_liked?(t) %>
                         <%= link_to post_like_path(id: t.id, post_id: t.id), method: :delete do %>
-                            <i class="fas fa-heart fa-2x"></i><%= t.likes.count %>
+                            <i class="fa-solid fa-thumbs-down"></i><%= t.likes.count %>
                         <% end %>
                     <% else %>
                         <%= link_to post_likes_path(id: t.id, post_id: t.id), method: :post do %>
-                            <i class="far fa-heart fa-2x"></i><%= t.likes.count %>
+                            <i class="fa-solid fa-thumbs-down"></i><%= t.likes.count %>
                         <% end %>
                     <% end %>
                 <% else %>
-                    <i class="far fa-heart fa-2x"></i><%= t.likes.count %>
+                    <i class="fa-solid fa-thumbs-down"></i><%= t.likes.count %>
                 <% end %>
                 <p><%= t.contents %></p>
                 <%= link_to "詳細へ", post_path(t.id) %>
@@ -43,7 +43,7 @@
             </div>
         <% end %>
     </div>
--->
+
 <%= month_calendar events: @posts do |date, post| %>
   <%= date %>
 
