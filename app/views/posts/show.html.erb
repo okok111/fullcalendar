@@ -3,8 +3,8 @@
 <%= link_to "https://twitter.com/share?url=#{ request.url }&text=#{ @post.title }&text=#{ @post.contents }" ,target: '_blank' do %>
     <%= image_tag "twi.png", size: '50x50' %>
 <% end %>
-
-<div class="post">
+<div class="line-it-button" data-lang="ja" data-type="share-a" data-env="REAL" data-url="http://localhost:3000/" data-color="default" data-size="small" data-count="true" data-ver="3" style="display: none;"></div>
+<script src="https://www.line-website.com/social-plugins/js/thirdparty/loader.min.js" async="async" defer="defer"></script><div class="post">
     <p><%= @post.title %></p>
     <p>
         <% if @post.image.present? %>
