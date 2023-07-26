@@ -1,19 +1,31 @@
 <h1>posts#index</h1>
+
+<%= form_tag({controller:"posts",action:"index"}, method: :get) do %>
+    <% Tag.all.each do |t| %>
+        <li><%= check_box :tag_ids, t.name %><%= t.name %></li>
+    <% end %>
+    <%= submit_tag '検索' %>
+<% end %>
+
 <% if user_signed_in? %>    
     <%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>
     <%= link_to "マイページへ", user_path(current_user.id) %>
 <% else %>
     <%= link_to 'ログイン', new_user_session_path  %>
 <% end %>
-
-<%= link_to "新規投稿へ", new_post_path %>
-
+<% if user_signed_in? %>
+    <%= link_to "新規投稿へ", new_post_path %>
+<% end %>
 
     <div class="posts-container">
         <% @posts.each do |t| %>
             <div class="post">
                 <p><a href="/users/<%= t.user.id %>"><%= t.user.name %></a></p>
                 <p><%= t.title %></p>
+                <p></p>
+
+                
+            <!--
                 <p>
                     <% if t.image.present? %>
                         <%= image_tag t.image_url, size: '250x200'%>
@@ -35,6 +47,7 @@
                     <i class="fa-solid fa-thumbs-down"></i><%= t.likes.count %>
                 <% end %>
                 <p><%= t.contents %></p>
+            -->
                 <%= link_to "詳細へ", post_path(t.id) %>
                 <% if user_signed_in? %>
                     <%= link_to "編集する", edit_post_path(t.id) %>
@@ -43,15 +56,22 @@
             </div>
         <% end %>
     </div>
+<!--
+    <%= month_calendar events: @posts do |date, post| %>
+    <%= date %>
 
-<%= month_calendar events: @posts do |date, post| %>
-  <%= date %>
+    <% post.each do |post| %>
+        <div>
+        <%= link_to post.title, post %>
+        </div>
+    <% end %>
+    <% end %>
+-->
 
-  <% post.each do |post| %>
-    <div>
-      <%= link_to post.title, post %>
-    </div>
-  <% end %>
+<%= month_calendar(attribute: :start_time, start_attribute: :start_time, end_attribute: :end_time, events: @events) do |date, events| %>
+    <%= date %>
+  <% events.each do |event| %>
+    <p><%= link_to event.title, event %></p>
+  <% end %> 
 <% end %>
-
 

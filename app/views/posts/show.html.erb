@@ -28,14 +28,29 @@
     <% end %>
     <p><%= @post.contents %></p>
 </div>
+<% @post.tags.each do |tag| %>
+    <span><%= tag.name %></span>
+    <% @tagtag = tag.name %>
+<% end %>
+
+    <% @related_posts.each do |post| %>
+    <div class="related-post">
+        <%= link_to post.title, post_path(post) %>
+    </div>
+    <% end %>
+
+
     <div class="comment-wrapper">
     <p>コメント一覧</p>
+    <%= @comments.count %>
         <% @comments.each do |c| %>
             <div>
             <%= c.user.email unless c.user.blank? %>
             <br>
             <%= c.content %>
             </div>
+            <%#=link_to "削除", comment_path(c.id), method: :delete %>
+            <%=link_to "削除", post_comment_path(c.post.id, c.id), method: :delete %></p>
             <br>
         <% end %>
         <% if user_signed_in? %>
