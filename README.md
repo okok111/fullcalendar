@@ -1,24 +1,9 @@
-# README
+# メモ
+- fullcalendar
+- 徒然なるままに書きます悪しからず
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## 理想はこんな感じ
+https://fullcalendar.io/demos
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## 導入
+`yarn add @fullcalendar/core @fullcalendar/interaction @fullcalendar/daygrid @fullcalendar/timegrid`
