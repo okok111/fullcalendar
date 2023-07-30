@@ -1,20 +1,8 @@
 class PostsController < ApplicationController
   before_action :authenticate_user! , except: [:show, :index]
     def index
-    # start_date = params.fetch(:start_date, Date.today).to_date
-    # @events = Post.where('start_time <= ? AND (end_time >= ? OR end_time IS NULL)', start_date.end_of_month.end_of_week, start_date.beginning_of_month.beginning_of_week)
-    # puts @events.inspect
-        @posts = Post.all
-        if params[:tag_ids]
-            @posts = []
-            params[:tag_ids].each do |key, value|
-                if value == "1"
-                    tag_posts = Tag.find_by(name: key).posts
-                    @posts = @posts.empty? ? tag_posts : @posts & tag_posts
-                end
-            end
-        end
-        @events = Post.all
+        @posts = Post.all #投稿表示用（今回は使っていない）
+        @events = Post.all #カレンダー表示用（一応分けておく方が良き）
     end
 
   def new
@@ -31,17 +19,9 @@ class PostsController < ApplicationController
       end
   end
   def show
-        @post = Post.find(params[:id])
-        @comments = @post.comments
-        @comment = Comment.new
-        
-        @tags = @post.tags
-        @related_posts = []
-        @tags.each do |tag|
-            tag.posts.each do |post|
-                @related_posts << post unless post == @post
-            end
-        end
+      @post = Post.find(params[:id])
+      @comments = @post.comments
+      @comment = Comment.new
   end
 
   def edit
