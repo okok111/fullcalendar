@@ -14,6 +14,7 @@ class PostsController < ApplicationController
                 end
             end
         end
+        @events = Post.all
     end
 
   def new
