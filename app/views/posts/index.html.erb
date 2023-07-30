@@ -68,10 +68,7 @@
     <% end %>
 -->
 
-<%= month_calendar(attribute: :start_time, start_attribute: :start_time, end_attribute: :end_time, events: @events) do |date, events| %>
-    <%= date %>
-  <% events.each do |event| %>
-    <p><%= link_to event.title, event %></p>
-  <% end %> 
-<% end %>
+<div id='calendar'></div>
+
+<%= javascript_pack_tag 'calendar/event' %>
 

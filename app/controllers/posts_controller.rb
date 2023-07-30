@@ -1,20 +1,20 @@
 class PostsController < ApplicationController
   before_action :authenticate_user! , except: [:show, :index]
-  def index
-    start_date = params.fetch(:start_date, Date.today).to_date
-    @events = Post.where('start_time <= ? AND (end_time >= ? OR end_time IS NULL)', start_date.end_of_month.end_of_week, start_date.beginning_of_month.beginning_of_week)
-    puts @events.inspect
-    @posts = Post.all
-    if params[:tag_ids]
-        @posts = []
-        params[:tag_ids].each do |key, value|
-            if value == "1"
-                tag_posts = Tag.find_by(name: key).posts
-                @posts = @posts.empty? ? tag_posts : @posts & tag_posts
+    def index
+    # start_date = params.fetch(:start_date, Date.today).to_date
+    # @events = Post.where('start_time <= ? AND (end_time >= ? OR end_time IS NULL)', start_date.end_of_month.end_of_week, start_date.beginning_of_month.beginning_of_week)
+    # puts @events.inspect
+        @posts = Post.all
+        if params[:tag_ids]
+            @posts = []
+            params[:tag_ids].each do |key, value|
+                if value == "1"
+                    tag_posts = Tag.find_by(name: key).posts
+                    @posts = @posts.empty? ? tag_posts : @posts & tag_posts
+                end
             end
         end
     end
-  end
 
   def new
       @post = Post.new
