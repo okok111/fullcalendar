@@ -18,6 +18,8 @@ document.addEventListener('turbolinks:load', function() {
     buttonText: {
       today: '今日'
     },
+    expandRows: true,
+    allDayText: '終日',
     events:'/posts.json',
 
     // Handle the event click
