@@ -22,9 +22,12 @@ document.addEventListener('turbolinks:load', function() {
 
     // Handle the event click
     eventClick: function(arg) {
-      var eventUrl = '/posts/' + arg.event.id; // Assuming your event has an 'id' attribute
+      var eventUrl = '/posts/' + arg.event.id;
       window.location.href = eventUrl;
-      info.el.style.borderColor = 'red';
+    },
+    eventColor: function(arg) {
+      var eventColor = arg.event.color;
+      return eventColor;
     },
   });
 
