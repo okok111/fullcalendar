@@ -1,13 +1,13 @@
 class PostsController < ApplicationController
-  before_action :authenticate_user! , except: [:show, :index]
+    before_action :authenticate_user! , except: [:show, :index]
     def index
         @posts = Post.all #投稿表示用（今回は使っていない）
-        @events = Post.all #カレンダー表示用（一応分けておく方が良き）
+        @events = current_user.posts #カレンダー表示用（一応分けておく方が良き）
     end
 
-  def new
-      @post = Post.new
-  end
+    def new
+        @post = Post.new
+    end
 
   def create
       post = Post.new(post_params)
