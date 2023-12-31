@@ -32,15 +32,29 @@ document.addEventListener('turbolinks:load', function() {
       return eventColor;
     },
     eventContent: function(arg) {
-      // arg.event.extendedProps.deadline にデッドラインの値があると仮定
-      var deadlinePercentage = arg.event.extendedProps.deadline * 100; // パーセンテージに変換
+      var startTime = arg.event.start;
+      var endTime = arg.event.end;
+      var deadline = arg.event.deadline;
+      // startTime から endTime までの全体の期間
+      var totalTime = endTime - startTime;
+      var oikomi = endTime - deadline;
+      var deadlinePercentage = oikomi / totalTime * 100; // パーセンテージに変換
 
       // カスタムスタイルを適用
-      var style = 'background: linear-gradient(to right, ' +
-                  arg.event.backgroundColor + ' ' + deadlinePercentage + '%, transparent ' + deadlinePercentage + '%);';
+      var style ='position: absolute; ' +
+                  'top: 0; ' +
+                  'right: 0; ' +
+                  'bottom: 0; ' +
+                  'width: ' + (deadlinePercentage * 100) + '%; ' +
+                  'background-color: red; ' +
+                  'z-index: 1;';
 
       // fc-event-main 要素にスタイルを追加
-      return { domNodes: $(arg.el).addClass('custom-event-style').attr('style', style) };
+      var customEventStyle = document.createElement('div');
+      customEventStyle.className = 'custom-event-style';
+      customEventStyle.setAttribute('style', style);
+
+      return { domNodes: [customEventStyle] };
     },
   });
 

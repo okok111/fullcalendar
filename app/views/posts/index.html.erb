@@ -1,16 +1,25 @@
 <h1>posts#index</h1>
 <style>
-    .fc-event-main::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    width: <%= 100-50 %>%;
-    background-color: red;
-    z-index: 1; /* Ensure the overlay is above the green background */
+        .base {
+      height: 30px;
+      width: 400px;
+      background-color: green;
+      position: relative;
+    }
+
+    .overlay {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      width: 30%;
+      background-color: red;
+      z-index: 1; /* Ensure the overlay is above the green background */
     }
 </style>
+ <div class="base">
+    <div class="overlay"></div>
+  </div>
 <% if user_signed_in? %>    
     <%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>
     <%= link_to "マイページへ", user_path(current_user.id) %>
