@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_07_31_004542) do
+ActiveRecord::Schema.define(version: 2023_12_31_071849) do
 
   create_table "comments", force: :cascade do |t|
     t.string "content"
@@ -51,6 +51,7 @@ ActiveRecord::Schema.define(version: 2023_07_31_004542) do
     t.datetime "start_time"
     t.datetime "end_time"
     t.string "color"
+    t.datetime "deadline"
   end
 
   create_table "tags", force: :cascade do |t|

@@ -4,4 +4,5 @@ json.array!(@events) do |event|
   json.color event.color
   json.start event.start_time
   json.end event.end_time
+  json.deadline event.deadline
 end

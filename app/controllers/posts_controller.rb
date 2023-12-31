@@ -45,7 +45,7 @@ class PostsController < ApplicationController
 
   private
   def post_params
-      params.require(:post).permit(:title, :contents ,:image ,:birthday ,:start_time,:end_time, :color,tag_ids: [])
+      params.require(:post).permit(:title, :contents ,:image ,:birthday ,:start_time,:end_time,:deadline, :color,tag_ids: [])
   end
 
 end

@@ -31,6 +31,17 @@ document.addEventListener('turbolinks:load', function() {
       var eventColor = arg.event.color;
       return eventColor;
     },
+    eventContent: function(arg) {
+      // arg.event.extendedProps.deadline にデッドラインの値があると仮定
+      var deadlinePercentage = arg.event.extendedProps.deadline * 100; // パーセンテージに変換
+
+      // カスタムスタイルを適用
+      var style = 'background: linear-gradient(to right, ' +
+                  arg.event.backgroundColor + ' ' + deadlinePercentage + '%, transparent ' + deadlinePercentage + '%);';
+
+      // fc-event-main 要素にスタイルを追加
+      return { domNodes: $(arg.el).addClass('custom-event-style').attr('style', style) };
+    },
   });
 
   calendar.render();
