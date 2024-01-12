@@ -31,7 +31,7 @@ document.addEventListener('turbolinks:load', function() {
       var eventColor = arg.event.color;
       return eventColor;
     },
-    eventContent: function(arg) {
+    eventDidMount: function(arg) {
       var startTime = arg.event.start;
       var endTime = arg.event.end;
       var deadline = arg.event.deadline;
@@ -40,21 +40,17 @@ document.addEventListener('turbolinks:load', function() {
       var oikomi = endTime - deadline;
       var deadlinePercentage = oikomi / totalTime * 100; // パーセンテージに変換
 
-      // カスタムスタイルを適用
-      var style ='position: absolute; ' +
-                  'top: 0; ' +
-                  'right: 0; ' +
-                  'bottom: 0; ' +
-                  'width: ' + (deadlinePercentage * 100) + '%; ' +
-                  'background-color: red; ' +
-                  'z-index: 1;';
+      var style = 'position: absolute; ' +
+      'content: ""; ' +
+      'top: 0; ' +
+      'right: 0; ' +
+      'bottom: 0; ' +
+      'width: ' + deadlinePercentage + '%; ' +
+      'background-color: red; ' +
+      'z-index: 1;';
 
       // fc-event-main 要素にスタイルを追加
-      var customEventStyle = document.createElement('div');
-      customEventStyle.className = 'custom-event-style';
-      customEventStyle.setAttribute('style', style);
-
-      return { domNodes: [customEventStyle] };
+      arg.el.querySelector('.fc-event-main').insertAdjacentHTML('beforeend', '<div style="' + style + '"></div>');
     },
   });
 
